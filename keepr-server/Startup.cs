@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using keepr_server.Repositories;
+using keepr_server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +56,19 @@ namespace keepr_server
                           .AllowCredentials();
               });
         });
+
+
+      services.AddTransient<KeepsRepository>();
+      services.AddTransient<ProfilesRepository>();
+      services.AddTransient<VaultKeepsRepository>();
+      services.AddTransient<VaultsRepository>();
+
+
+      services.AddTransient<KeepsService>();
+      services.AddTransient<ProfilesService>();
+      services.AddTransient<VaultKeepsService>();
+      services.AddTransient<VaultsService>();
+
 
 
       services.AddControllers();

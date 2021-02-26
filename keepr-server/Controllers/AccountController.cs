@@ -16,6 +16,11 @@ namespace keepr_server.Controllers
   {
     private readonly ProfilesService _ps;
 
+    public AccountController(ProfilesService ps)
+    {
+      _ps = ps;
+    }
+
 
     [HttpGet]
     public async Task<ActionResult<ProfilesController>> Get()
