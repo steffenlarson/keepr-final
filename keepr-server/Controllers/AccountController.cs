@@ -23,7 +23,7 @@ namespace keepr_server.Controllers
 
 
     [HttpGet]
-    public async Task<ActionResult<ProfilesController>> Get()
+    public async Task<ActionResult<Profile>> Get()
     {
       try
       {

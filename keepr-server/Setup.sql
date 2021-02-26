@@ -43,7 +43,6 @@
 --   ON DELETE CASCADE
 -- );
 
--- FIXME Table wont create. "Cannot add foreign key constraint"
 -- CREATE TABLE vaultkeeps
 -- (
 --    id INT NOT NULL AUTO_INCREMENT,
