@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "keepr-client",
+			"name": "client"
+		},
+		{
+			"path": "keepr-server",
+			"name": "server"
+		}
+	],
+	"settings": {}
+}
