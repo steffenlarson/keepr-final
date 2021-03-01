@@ -10,7 +10,7 @@
 
 -- CREATE TABLE keeps
 -- (
---   id INT NOT NULL,
+--   id INT NOT NULL AUTO_INCREMENT,
 --   creatorId VARCHAR(255) NOT NULL,
 --   name VARCHAR(255),
 --   description VARCHAR(255) NOT NULL,
@@ -29,7 +29,7 @@
 
 -- CREATE TABLE vaults
 -- (
---   id INT NOT NULL,
+--   id INT NOT NULL AUTO_INCREMENT,
 --   creatorId VARCHAR(255) NOT NULL,
 --   name VARCHAR(255),
 --   description VARCHAR(255) NOT NULL,
@@ -62,4 +62,4 @@
 -- );
 
 
--- DROP TABLE vaults;
+-- DROP TABLE keeps;

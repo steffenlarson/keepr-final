@@ -24,7 +24,7 @@ namespace keepr_server.Repositories
        keep.*,
        profile.* 
        FROM keeps keep 
-       JOIN profiles profile ON keep.ownerId = profile.id;";
+       JOIN profiles profile ON keep.creatorId = profile.id;";
       return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, splitOn: "id");
     }
 
@@ -35,7 +35,7 @@ namespace keepr_server.Repositories
        keep.*,
        profile.* 
        FROM keeps keep 
-       JOIN profiles profile ON keep.ownerId = profile.id
+       JOIN profiles profile ON keep.creatorId = profile.id
        WHERE keep.id = @id;";
       return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { id }, splitOn: "id").FirstOrDefault();
     }
@@ -45,7 +45,7 @@ namespace keepr_server.Repositories
     {
       string sql = @"
             INSERT INTO Keeps
-            (name, ownerId, description, img)
+            (name, creatorId, description, img)
             VALUES
             (@Name, @CreatorId, @Description, @Img);
             SELECT LAST_INSERT_ID()";
@@ -58,7 +58,7 @@ namespace keepr_server.Repositories
             UPDATE keeps
             SET 
             name = @Name,
-            description = @Description
+            description = @Description,
             img = @Img
             WHERE id = @Id;";
       _db.Execute(sql, editData);
