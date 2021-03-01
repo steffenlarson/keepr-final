@@ -32,6 +32,7 @@ namespace keepr_server.Controllers
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        vk.CreatorId = userInfo.Id;
         _service.Create(vk, userInfo.Id);
         return Ok("success");
       }

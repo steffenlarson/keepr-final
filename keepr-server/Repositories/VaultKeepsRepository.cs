@@ -21,9 +21,9 @@ namespace keepr_server.Repositories
     {
       string sql = @"
       INSERT INTO vaultkeeps
-      (vaultId, keepId)
+      (creatorId, vaultId, keepId)
       VALUES
-      (@VaultId, @KeepId);";
+      (@CreatorId, @VaultId, @KeepId);";
       _db.Execute(sql, vk);
     }
     internal VaultKeep GetById(int id)
