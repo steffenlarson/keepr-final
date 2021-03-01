@@ -1,4 +1,5 @@
 using System;
+using keepr_server.Exceptions;
 using keepr_server.Models;
 using keepr_server.Repositories;
 
@@ -26,7 +27,7 @@ namespace keepr_server.Services
       }
       if (vault.CreatorId != id)
       {
-        throw new NotAuthorized("Not The Owner of this Vault");
+        throw new Forbidden("Not The Owner of this Vault");
       }
       _repo.Create(vk);
     }

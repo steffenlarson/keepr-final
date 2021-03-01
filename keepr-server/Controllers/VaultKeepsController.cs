@@ -1,12 +1,18 @@
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
+using keepr_server.Exceptions;
 using keepr_server.Models;
 using keepr_server.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr_server.Controllers
 {
+
+  [Route("api/[controller]")]
+  [ApiController]
+
   public class VaultKeepsController : ControllerBase
   {
 
@@ -39,7 +45,6 @@ namespace keepr_server.Controllers
       }
     }
 
-    // Delete 
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {
