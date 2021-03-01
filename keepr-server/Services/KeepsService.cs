@@ -1,7 +1,69 @@
+
+
+
+using System;
+using System.Collections.Generic;
+using keepr_server.Models;
+using keepr_server.Repositories;
+
 namespace keepr_server.Services
 {
-    public class KeepsService
+  public class KeepsService
+  {
+
+    private readonly KeepsRepository _repo;
+    public KeepsService(KeepsRepository repo)
     {
-        
+      _repo = repo;
     }
+
+
+    public IEnumerable<Keep> GetAll()
+    {
+      IEnumerable<Keep> restaurants = _repo.GetAll();
+      return restaurants;
+    }
+
+    internal Keep Get(int id)
+    {
+      var data = _repo.Get(id);
+      if (data == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return data;
+    }
+
+
+    public Keep Create(Keep newKeep)
+    {
+      newKeep.Id = _repo.Create(newKeep);
+      return newKeep;
+    }
+
+    internal Keep Edit(Keep editData, string userId)
+    {
+      Keep original = Get(editData.Id);
+      if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Keep You did not Create"); }
+      editData.Name = editData.Name == null ? original.Name : editData.Name;
+      editData.Description = editData.Description == null ? original.Description : editData.Description;
+      editData.Img = editData.Img == null ? original.Img : editData.Img;
+
+      return _repo.Edit(editData);
+
+    }
+
+    internal string Delete(int id, string userId)
+    {
+      Keep original = _repo.Get(id);
+      if (original == null) { throw new Exception("Bad ID"); }
+      if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Keep You did not Create"); }
+      _repo.Remove(id);
+      return "successfully deleted";
+    }
+
+
+
+
+  }
 }
