@@ -25,14 +25,35 @@ namespace keepr_server.Services
       return restaurants;
     }
 
-    internal Vault Get(int id)
+    internal Vault Get(int id, string userInfo)
     {
-      var data = _vr.Get(id);
-      if (data == null)
+
+      if (userInfo == null)
       {
-        throw new Exception("Invalid Id");
+        var data = _vr.Get(id);
+        if (data == null)
+        {
+          throw new Exception("Invalid Id");
+        }
+        return data;
       }
-      return data;
+      else
+      {
+        var data = _vr.Get(id);
+        if (data == null)
+        {
+          throw new Exception("Invalid Id");
+        }
+
+        else if (data.isPrivate == true && data.CreatorId != userInfo)
+        {
+          throw new Exception("This Vault is private");
+        }
+
+        return data;
+      }
+
+
     }
 
 
@@ -46,12 +67,11 @@ namespace keepr_server.Services
     // REVIEW Do I need to add the bool value for the edit. The isPrivate?
     internal Vault Edit(Vault editData, string userId)
     {
-      Vault original = Get(editData.Id);
+      Vault original = Get(editData.Id, userId);
 
       if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Vault You did not Create"); }
       editData.Name = editData.Name == null ? original.Name : editData.Name;
       editData.Description = editData.Description == null ? original.Description : editData.Description;
-
       return _vr.Edit(editData);
 
     }

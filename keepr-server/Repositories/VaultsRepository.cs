@@ -1,6 +1,3 @@
-
-
-
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -46,27 +43,26 @@ namespace keepr_server.Repositories
 
 
 
-    // REVIEW Do I need to add isPrivate on creating?
     internal int Create(Vault VaultData)
     {
       string sql = @"
             INSERT INTO Vaults
-            (name, creatorId, description)
+            (name, creatorId, description, isPrivate)
             VALUES
-            (@Name, @CreatorId, @Description);
+            (@Name, @CreatorId, @Description, @IsPrivate);
             SELECT LAST_INSERT_ID()";
       return _db.ExecuteScalar<int>(sql, VaultData);
     }
 
 
-    // REVIEW do I need to add the isPrivate on edits? Look at tests
     internal Vault Edit(Vault editData)
     {
       string sql = @"
             UPDATE vaults
             SET 
             name = @Name,
-            description = @Description
+            description = @Description,
+            isPrivate = @IsPrivate
             WHERE id = @Id;";
       _db.Execute(sql, editData);
       return editData;
