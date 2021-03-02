@@ -18,9 +18,10 @@ namespace keepr_server.Services
       _vr = vr;
     }
 
-    internal void Create(VaultKeep vk, string id)
+    internal VaultKeep Create(VaultKeep vk, string id)
     {
       Vault vault = _vr.Get(vk.VaultId);
+
       if (vault == null)
       {
         throw new Exception("Invalid Id");
@@ -29,7 +30,8 @@ namespace keepr_server.Services
       {
         throw new Forbidden("Not The Owner of this Vault");
       }
-      _repo.Create(vk);
+      vk.Id = _repo.Create(vk);
+      return vk;
     }
 
     internal void Delete(int id)

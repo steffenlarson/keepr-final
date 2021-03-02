@@ -42,7 +42,19 @@ namespace keepr_server.Controllers
 
     // GET vaults by profile id
 
-
+    [HttpGet("{id}/vaults")]
+    public ActionResult<IEnumerable<Vault>> GetVaultsByProfileId(string id)
+    {
+      try
+      {
+        IEnumerable<Vault> vaults = _vs.GetByProfileId(id);
+        return Ok(vaults);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
 
 
