@@ -12,9 +12,11 @@ namespace keepr_server.Services
   {
 
     private readonly KeepsRepository _repo;
-    public KeepsService(KeepsRepository repo)
+    private readonly VaultsRepository _vrepo;
+    public KeepsService(KeepsRepository repo, VaultsRepository vrepo)
     {
       _repo = repo;
+      _vrepo = vrepo;
     }
 
 
@@ -62,6 +64,17 @@ namespace keepr_server.Services
       return "successfully deleted";
     }
 
+
+
+    internal IEnumerable<Keep> GetKeepsByVaultId(int vaultId)
+    {
+      Vault exists = _vrepo.Get(vaultId);
+      if (exists == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return _repo.GetKeepsByVaultId(vaultId);
+    }
 
 
 

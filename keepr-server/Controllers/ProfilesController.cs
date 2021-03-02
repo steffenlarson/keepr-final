@@ -41,20 +41,7 @@ namespace keepr_server.Controllers
 
 
     // GET vaults by profile id
-    [HttpGet(("{id}/vaults"))]
-    [Authorize]
-    public ActionResult<IEnumerable<PartyPartyMemberViewModel>> GetParties(string id)
-    {
-      try
-      {
-        IEnumerable<PartyPartyMemberViewModel> parties = _ps.GetByProfileId(id);
-        return Ok(parties);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+
 
 
 

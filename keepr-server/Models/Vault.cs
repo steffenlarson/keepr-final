@@ -11,7 +11,10 @@ namespace keepr_server.Models
   }
 
 
-
+  public class VaultVaultKeepViewModel : Vault
+  {
+    public int VaultKeepId { get; set; }
+  }
 
 
 }
