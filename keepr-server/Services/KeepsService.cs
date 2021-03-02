@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using keepr_server.Models;
 using keepr_server.Repositories;
 
@@ -76,6 +77,14 @@ namespace keepr_server.Services
       return _repo.GetKeepsByVaultId(vaultId);
     }
 
+
+
+
+
+    internal IEnumerable<Keep> GetByProfileId(string id)
+    {
+      return _repo.GetByCreatorId(id);
+    }
 
 
   }

@@ -57,6 +57,23 @@ namespace keepr_server.Controllers
     }
 
 
+    // GET keeps by profile id
+
+    [HttpGet("{id}/keeps")]
+    public ActionResult<IEnumerable<Keep>> GetKeepsByProfileId(string id)
+    {
+      try
+      {
+        IEnumerable<Keep> keeps = _ks.GetByProfileId(id);
+        return Ok(keeps);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+
 
 
 
