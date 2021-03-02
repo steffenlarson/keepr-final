@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using keepr_server.Models;
 using keepr_server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr_server.Controllers
@@ -12,10 +14,14 @@ namespace keepr_server.Controllers
   {
 
     private readonly ProfilesService _service;
+    private readonly VaultsService _vs;
+    private readonly KeepsService _ks;
 
-    public ProfilesController(ProfilesService service)
+    public ProfilesController(ProfilesService service, VaultsService vs, KeepsService ks)
     {
       _service = service;
+      _vs = vs;
+      _ks = ks;
     }
 
 
@@ -32,6 +38,27 @@ namespace keepr_server.Controllers
         return BadRequest(e.Message);
       }
     }
+
+
+    // GET vaults by profile id
+    [HttpGet(("{id}/vaults"))]
+    [Authorize]
+    public ActionResult<IEnumerable<PartyPartyMemberViewModel>> GetParties(string id)
+    {
+      try
+      {
+        IEnumerable<PartyPartyMemberViewModel> parties = _ps.GetByProfileId(id);
+        return Ok(parties);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+
+
+
 
 
   }

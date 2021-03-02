@@ -9,4 +9,9 @@ namespace keepr_server.Models
     public bool isPrivate { get; set; }
     public Profile Creator { get; set; }
   }
+
+
+
+
+
 }
