@@ -63,3 +63,17 @@
 
 
 -- DROP TABLE keeps;
+
+
+
+-- SET FOREIGN_KEY_CHECKS = 0;
+
+-- DROP TABLE IF EXISTS profiles;
+
+-- DROP TABLE IF EXISTS keeps;
+
+-- DROP TABLE IF EXISTS vaults;
+
+-- DROP TABLE IF EXISTS vaultkeeps;
+
+-- SET FOREIGN_KEY_CHECKS = 1;

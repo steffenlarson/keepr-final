@@ -1,6 +1,23 @@
 <template>
   <div class="home container-fluid">
-    <keep-component v-for="k in state.keeps" :key="k.id" />
+    <div class="row">
+    </div>
+    <div class="row MyModal">
+      <keep-component v-for="k in state.keeps"
+                      :key="k.id"
+                      :keep-prop="k"
+                      type="button"
+                      data-toggle="modal"
+                      data-target=".bd-example-modal-lg"
+      />
+
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,7 +34,7 @@ export default {
     })
     onMounted(async() => {
       try {
-        debugger
+        // debugger
         await keepsService.getKeeps()
       } catch (error) {
         logger.error(error)
