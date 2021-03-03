@@ -34,6 +34,7 @@ namespace keepr_server.Services
       {
         throw new Exception("Invalid Id");
       }
+      data.Views += 1;
       return data;
     }
 

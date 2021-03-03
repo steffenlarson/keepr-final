@@ -16,7 +16,7 @@ namespace keepr_server.Repositories
     }
 
 
-
+    // FIXME The lines 27-29  need to increment keeps value on create
     internal int Create(VaultKeep vk)
     {
       string sql = @"
@@ -24,6 +24,9 @@ namespace keepr_server.Repositories
       (creatorId, vaultId, keepId)
       VALUES
       (@CreatorId, @VaultId, @KeepId);
+      UPDATE keeps
+      SET Keeps = Keeps + 1
+      WHERE keep.id = @keepId;
       SELECT LAST_INSERT_ID()";
       return _db.ExecuteScalar<int>(sql, vk);
     }

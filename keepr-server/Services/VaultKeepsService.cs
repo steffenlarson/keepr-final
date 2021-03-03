@@ -11,11 +11,13 @@ namespace keepr_server.Services
 
     private readonly VaultKeepsRepository _repo;
     private readonly VaultsRepository _vr;
+    private readonly KeepsRepository _kr;
 
-    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vr)
+    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vr, KeepsRepository kr)
     {
       _repo = repo;
       _vr = vr;
+      _kr = kr;
     }
 
     internal VaultKeep Create(VaultKeep vk, string id)
@@ -31,6 +33,8 @@ namespace keepr_server.Services
         throw new Forbidden("Not The Owner of this Vault");
       }
       vk.Id = _repo.Create(vk);
+      // Keep keep = _kr.Get(vk.KeepId);
+      // keep.Keeps += 1;
       return vk;
     }
 
