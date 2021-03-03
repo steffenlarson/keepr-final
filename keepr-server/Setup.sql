@@ -43,6 +43,7 @@
 --   ON DELETE CASCADE
 -- );
 
+-- FIXME Need to delete the table and take off the delete on cascade on the foreign keys here.
 -- CREATE TABLE vaultkeeps
 -- (
 --    id INT NOT NULL AUTO_INCREMENT,

@@ -1,19 +1,30 @@
 <template>
   <div class="home container-fluid">
     <div class="row">
-    </div>
-    <div class="row MyModal">
       <keep-component v-for="k in state.keeps"
                       :key="k.id"
                       :keep-prop="k"
-                      type="button"
+                      @click="getOne(k.id)"
                       data-toggle="modal"
-                      data-target=".bd-example-modal-lg"
+                      data-target="#keepDetails"
       />
-
-      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    </div>
+    <div class="row MyModal">
+      <div class="modal fade bd-example-modal-lg"
+           tabindex="-1"
+           role="dialog"
+           id="keepDetails"
+           aria-labelledby="myLargeModalLabel"
+           aria-hidden="true"
+      >
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+          <div class="row modal-content">
+            <div class="col">
+            </div>
+            <div class="col">
+              <p>Hello</p>
+              <p>{{ state.activeKeep.name }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -26,11 +37,13 @@ import { reactive, onMounted, computed } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { logger } from '../utils/Logger'
+import { $ } from 'jquery'
 export default {
   name: 'Home',
   setup() {
     const state = reactive({
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      activeKeep: computed(() => AppState.activeKeep)
     })
     onMounted(async() => {
       try {
@@ -41,7 +54,15 @@ export default {
       }
     })
     return {
-      state
+      state,
+      async getOne(id) {
+        try {
+          await keepsService.getOne(id)
+          $('#keepDetails').modal('hide')
+        } catch (error) {
+          logger.error(error)
+        }
+      }
     }
   }
 }
