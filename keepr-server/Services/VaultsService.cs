@@ -27,33 +27,30 @@ namespace keepr_server.Services
 
     internal Vault Get(int id, string userInfo)
     {
-
-      if (userInfo == null)
+      var data = _vr.Get(id);
+      if (data == null)
       {
-        var data = _vr.Get(id);
-        if (data == null)
-        {
-          throw new Exception("Invalid Id");
-        }
-        return data;
+        throw new Exception("Invalid Id");
       }
-      else
+      else if (data.isPrivate == true && data.CreatorId != userInfo)
       {
-        var data = _vr.Get(id);
-        if (data == null)
-        {
-          throw new Exception("Invalid Id");
-        }
-
-        else if (data.isPrivate == true && data.CreatorId != userInfo)
-        {
-          throw new Exception("This Vault is private");
-        }
-
-        return data;
+        throw new Exception("This Vault is private");
       }
+      return data;
 
-
+    }
+    internal Vault GetPublic(int id)
+    {
+      var data = _vr.Get(id);
+      if (data == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      else if (data.isPrivate == true)
+      {
+        throw new Exception("This vault is Private");
+      }
+      return data;
     }
 
 

@@ -46,15 +46,30 @@ namespace keepr_server.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Vault>> Get(int id)
     {
-      try
+      Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+
+      if (userInfo == null)
       {
-        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_vs.Get(id, userInfo.Id));
+        try
+        {
+          return Ok(_vs.GetPublic(id));
+        }
+        catch (Exception e)
+        {
+          return BadRequest(e.Message);
+        };
       }
-      catch (Exception e)
+      else
       {
-        return BadRequest(e.Message);
-      };
+        try
+        {
+          return Ok(_vs.Get(id, userInfo.Id));
+        }
+        catch (Exception e)
+        {
+          return BadRequest(e.Message);
+        };
+      }
     }
 
 
