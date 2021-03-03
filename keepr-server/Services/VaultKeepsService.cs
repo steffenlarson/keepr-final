@@ -34,14 +34,19 @@ namespace keepr_server.Services
       return vk;
     }
 
-    internal void Delete(int id)
+    internal string Delete(int id, string userId)
     {
       var data = _repo.GetById(id);
       if (data == null)
       {
         throw new Exception("Invalid Id");
       }
+      if (data.CreatorId != userId)
+      {
+        throw new Exception("Cannot Delete vaults you do not own.");
+      }
       _repo.Delete(id);
+      return "successfully deleted";
     }
 
 

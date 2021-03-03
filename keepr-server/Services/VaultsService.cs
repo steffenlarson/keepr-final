@@ -76,8 +76,14 @@ namespace keepr_server.Services
     internal string Delete(int id, string userId)
     {
       Vault original = _vr.Get(id);
-      if (original == null) { throw new Exception("Bad ID"); }
-      if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Vault You did not Create"); }
+      if (original == null)
+      {
+        throw new Exception("Bad ID");
+      }
+      if (original.CreatorId != userId)
+      {
+        throw new Exception("Access Denied: Cannot Edit a Vault You did not Create");
+      }
       _vr.Remove(id);
       return "successfully deleted";
     }
