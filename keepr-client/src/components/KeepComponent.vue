@@ -1,5 +1,6 @@
 <template>
   <div class="KeepComponent">
+    <h1>This is the keep component </h1>
   </div>
 </template>
 
