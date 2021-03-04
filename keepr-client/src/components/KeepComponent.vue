@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="row MyModal">
+    <div class="row MyModal ">
       <div class="modal fade bd-example-modal-lg"
            tabindex="-1"
            role="dialog"
@@ -25,7 +25,7 @@
            aria-labelledby="myLargeModalLabel"
            aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg container-fluid">
           <div class="row modal-content">
             <div class="col-6">
               <img class="img-fluid my-3" :src="keepProp.img" alt="">

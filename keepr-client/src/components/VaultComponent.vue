@@ -1,7 +1,6 @@
 <template>
   <div class="VaultComponent container-fluid">
     <div class="card">
-      <img class="img-fluid" :src="vaultProp.img" alt="">
       <div class="card-body position">
         <div class="row">
           <div class="col">
@@ -23,6 +22,7 @@
 <script>
 export default {
   name: 'VaultComponent',
+  props: { vaultProp: { type: Object, required: true } },
   setup() {
     return {}
   },

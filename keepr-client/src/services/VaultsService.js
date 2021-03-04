@@ -12,6 +12,11 @@ class VaultsService {
     AppState.activeVault = res.data
   }
 
+  async getVaultsByProfileId(id) {
+    const res = await api.get('api/profiles/' + id + '/vaults')
+    AppState.vaults = res.data
+  }
+
   async createVault(vault) {
     const res = await api.post('api/vaults/', vault)
     AppState.vaults.push(res.data)
