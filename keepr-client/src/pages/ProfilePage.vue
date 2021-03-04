@@ -92,6 +92,64 @@
           </div>
         </div>
       </div>
+      <div class="Keep Modal">
+        <div class="modal fade"
+             id="keepCreator"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="keepCreatorLabel"
+             aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="keepCreatorLabel">
+                  New Keep
+                </h5>
+                <form type="submit" @submit.prevent="createKeep">
+                  <div class="form-group text-center">
+                    <label for=""></label>
+
+                    <input type="text"
+                           class="form-control"
+                           name="newKeep"
+                           v-model="state.newKeep.name"
+                           id="name"
+                           aria-describedby="helpId"
+                           placeholder="Keep name"
+                    >
+                    <input type="text"
+                           class="form-control"
+                           name="newKeep"
+                           v-model="state.newKeep.img"
+                           id="board"
+                           aria-describedby="helpId"
+                           placeholder="Img url"
+                    >
+
+                    <input type="text"
+                           class="form-control"
+                           name="newKeep"
+                           v-model="state.newKeep.description"
+                           id="board"
+                           aria-describedby="helpId"
+                           placeholder="Keep Description"
+                    >
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-outline btn-success ">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -132,6 +190,11 @@ export default {
         state.newVault.creatorId = route.params.id
         vaultsService.createVault(state.newVault)
         state.newVault = {}
+      },
+      createKeep() {
+        state.newKeep.creatorId = route.params.id
+        keepsService.createKeep(state.newKeep)
+        state.newKeep = {}
       }
     }
   },

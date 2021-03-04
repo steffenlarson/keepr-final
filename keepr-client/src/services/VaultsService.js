@@ -17,6 +17,11 @@ class VaultsService {
     AppState.vaults = res.data
   }
 
+  async getVaultsByAccount() {
+    const res = await api.get('api/account/vaults')
+    AppState.vaults = res.data
+  }
+
   async createVault(vault) {
     const res = await api.post('api/vaults/', vault)
     AppState.vaults.push(res.data)
