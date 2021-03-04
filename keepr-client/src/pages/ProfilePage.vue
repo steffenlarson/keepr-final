@@ -36,12 +36,13 @@ export default {
   name: 'ProfilePage',
   setup() {
     const state = reactive({
-      activeProfile: computed(() => AppState.activeProfile),
-      keeps: computed(() => AppState.keeps.filter(state.keeps.creatorId === state.activeProfile.id))
+      activeProfile: computed(() => AppState.activeProfile)
+      // REVIEW this is causing an error
+      // keeps: computed(() => AppState.keeps.filter(state.keeps.creatorId === state.activeProfile.id))
     })
     onMounted(async() => {
       try {
-        debugger
+        // REVIEW I cant hit this debugger or the one in the service, now I can but I dont understand what its telling me
         await profilesService.getProfileById(route.params.id)
         await vaultsService.getVaultsByProfileId(route.params.id)
         await keepsService.getKeepsByProfileId(route.params.id)

@@ -22,7 +22,7 @@ class KeepsService {
   }
 
   async deleteKeep(id) {
-    await api.delete('api/boards/' + id)
+    await api.delete('api/keeps/' + id)
     return 'successfully Deleted'
   }
 }
