@@ -58,7 +58,7 @@
                 </div>
               </span>
 
-              <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.id}}" data-dismiss="modal">
+              <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </router-link>
             </div>
@@ -72,8 +72,8 @@
 <script>
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { vaultsService } from '../services/VaultsService'
-import { logger } from '../utils/Logger'
+// import { vaultsService } from '../services/VaultsService'
+// import { logger } from '../utils/Logger'
 // import { AppState } from '../AppState'
 export default {
   name: 'KeepComponent',
@@ -83,15 +83,15 @@ export default {
       vaults: computed(() => AppState.vaults)
     })
     return {
-      state,
-      async addToVault(id) {
-        try {
-          // REVIEW help here I am not sure which service this needs to go to.
-          await vaultsService.addTo
-        } catch (error) {
-          logger.error(error)
-        }
-      }
+      state
+      // async addToVault(id) {
+      //   try {
+      //     // REVIEW help here I am not sure which service this needs to go to.
+      //     await vaultsService.addTo
+      //   } catch (error) {
+      //     logger.error(error)
+      //   }
+      // }
 
     }
   },

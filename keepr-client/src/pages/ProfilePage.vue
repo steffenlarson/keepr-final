@@ -27,7 +27,8 @@
 
 <script>
 import { onMounted, reactive, computed } from 'vue'
-import { route } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
 import { vaultsService } from '../services/VaultsService'
 import { profilesService } from '../services/ProfilesService'
@@ -35,8 +36,10 @@ import { keepsService } from '../services/KeepsService'
 export default {
   name: 'ProfilePage',
   setup() {
+    const route = useRoute()
     const state = reactive({
       activeProfile: computed(() => AppState.activeProfile)
+
       // REVIEW this is causing an error
       // keeps: computed(() => AppState.keeps.filter(state.keeps.creatorId === state.activeProfile.id))
     })
@@ -44,10 +47,11 @@ export default {
       try {
         // REVIEW I cant hit this debugger or the one in the service, now I can but I dont understand what its telling me
         await profilesService.getProfileById(route.params.id)
+        // debugger
         await vaultsService.getVaultsByProfileId(route.params.id)
         await keepsService.getKeepsByProfileId(route.params.id)
       } catch (error) {
-
+        logger.error(error)
       }
     })
     return {
