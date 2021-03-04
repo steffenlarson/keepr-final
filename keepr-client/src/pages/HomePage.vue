@@ -9,26 +9,6 @@
                       data-target="#keepDetails"
       />
     </div>
-    <div class="row MyModal">
-      <div class="modal fade bd-example-modal-lg"
-           tabindex="-1"
-           role="dialog"
-           id="keepDetails"
-           aria-labelledby="myLargeModalLabel"
-           aria-hidden="true"
-      >
-        <div class="modal-dialog modal-lg">
-          <div class="row modal-content">
-            <div class="col">
-            </div>
-            <div class="col">
-              <p>Hello</p>
-              <p>{{ state.activeKeep.name }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -59,6 +39,7 @@ export default {
         try {
           await keepsService.getOne(id)
           $('#keepDetails').modal('hide')
+          state.activeKeep = {}
         } catch (error) {
           logger.error(error)
         }
