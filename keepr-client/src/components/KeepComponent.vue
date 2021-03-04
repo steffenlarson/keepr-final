@@ -1,5 +1,5 @@
 <template>
-  <div class="KeepComponent col-md-4 col-6">
+  <div class="KeepComponent col-md-4 col-6 mt-2">
     <div class="card">
       <img class="img-fluid" :src="keepProp.img" alt="">
       <div class="card-body position">
@@ -33,6 +33,31 @@
             <div class="col-6">
               <h2>{{ keepProp.name }}</h2>
               <p>{{ keepProp.description }} </p>
+              <span>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                  >
+                    Move
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="dropdown-item"
+                            :id="vault.id"
+                            v-for="vault in state.vaults "
+                            :key="vault.id"
+                            @click="addToVault(vault.id)"
+                            href="#"
+                    > {{ vault.title }}</button>
+                    <div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+
               <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.id}}" data-dismiss="modal">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </router-link>
@@ -45,17 +70,28 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
+import { AppState } from '../AppState'
+import { vaultsService } from '../services/VaultsService'
+import { logger } from '../utils/Logger'
 // import { AppState } from '../AppState'
 export default {
   name: 'KeepComponent',
   props: { keepProp: { type: Object, required: true } },
   setup(props) {
     const state = reactive({
-
+      vaults: computed(() => AppState.vaults)
     })
     return {
-      state
+      state,
+      async addToVault(id) {
+        try {
+          // REVIEW help here I am not sure which service this needs to go to.
+          await vaultsService.addTo
+        } catch (error) {
+          logger.error(error)
+        }
+      }
 
     }
   },

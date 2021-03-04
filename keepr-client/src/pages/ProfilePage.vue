@@ -4,8 +4,8 @@
       <div class="col">
         <p>This is the profile page</p>
         <div class="about">
-          <!-- <h1>Welcome {{ AppState.activeProfile.name }}</h1> -->
-          <!-- <img class="rounded" :src="AppState.activeProfile.picture" alt="" /> -->
+          <h1>Welcome {{ state.activeProfile.name }}</h1>
+          <img class="rounded" :src="state.activeProfile.picture" alt="" />
           <p>Count</p>
           <p>count 2</p>
         </div>
@@ -19,6 +19,7 @@
     <div class="row">
       <div class="col">
         <h3>Keeps</h3>
+        <keep-component v-for="k in state.keeps" :key="k.id" :keep-prop="k" />
       </div>
     </div>
   </div>
@@ -35,10 +36,12 @@ export default {
   name: 'ProfilePage',
   setup() {
     const state = reactive({
-      activeProfile: computed(() => AppState.activeProfile)
+      activeProfile: computed(() => AppState.activeProfile),
+      keeps: computed(() => AppState.keeps.filter(state.keeps.creatorId === state.activeProfile.id))
     })
     onMounted(async() => {
       try {
+        debugger
         await profilesService.getProfileById(route.params.id)
         await vaultsService.getVaultsByProfileId(route.params.id)
         await keepsService.getKeepsByProfileId(route.params.id)
