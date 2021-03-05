@@ -33,6 +33,8 @@
             <div class="col-6">
               <h2>{{ keepProp.name }}</h2>
               <p>{{ keepProp.description }} </p>
+              <!-- TODO keep count and view count -->
+
               <span>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle"
@@ -53,6 +55,7 @@
                             href="#"
                     > {{ vault.title }}</button>
                     <div>
+                      <!-- TODO delete keep vif creator id == user id -->
                     </div>
                   </div>
                 </div>
