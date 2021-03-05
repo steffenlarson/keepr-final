@@ -33,112 +33,110 @@
         <keep-component v-for="k in state.keeps" :key="k.id" :keep-prop="k" />
       </div>
     </div>
-    <div class="Modals">
-      <div class="Vault Modal">
-        <div class="modal fade"
-             id="vaultCreator"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="vaultCreatorLabel"
-             aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="vaultCreatorLabel">
-                  New Vault
-                </h5>
-                <form type="submit" @submit.prevent="createVault">
-                  <div class="form-group text-center">
-                    <label for=""></label>
+    <div class="Vault Modal">
+      <div class="modal fade"
+           id="vaultCreator"
+           tabindex="-1"
+           role="dialog"
+           aria-labelledby="vaultCreatorLabel"
+           aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="vaultCreatorLabel">
+                New Vault
+              </h5>
+              <form type="submit" @submit.prevent="createVault">
+                <div class="form-group text-center">
+                  <label for=""></label>
 
-                    <input type="text"
-                           class="form-control"
-                           name="newVault"
-                           v-model="state.newVault.name"
-                           id="name"
-                           aria-describedby="helpId"
-                           placeholder="Vault name"
-                    >
+                  <input type="text"
+                         class="form-control"
+                         name="newVault"
+                         v-model="state.newVault.name"
+                         id="name"
+                         aria-describedby="helpId"
+                         placeholder="Vault name"
+                  >
 
-                    <input type="text"
-                           class="form-control"
-                           name="newVault"
-                           v-model="state.newVault.description"
-                           id="board"
-                           aria-describedby="helpId"
-                           placeholder="Vaults Description"
-                    >
-                    <input type="checkbox" v-model="state.newVault.isPrivate">
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="submit" class="btn btn-outline btn-success ">
-                        Submit
-                      </button>
-                    </div>
+                  <input type="text"
+                         class="form-control"
+                         name="newVault"
+                         v-model="state.newVault.description"
+                         id="board"
+                         aria-describedby="helpId"
+                         placeholder="Vaults Description"
+                  >
+                  <input type="checkbox" v-model="state.newVault.isPrivate">
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-outline btn-success ">
+                      Submit
+                    </button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
-      <div class="Keep Modal">
-        <div class="modal fade"
-             id="keepCreator"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="keepCreatorLabel"
-             aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="keepCreatorLabel">
-                  New Keep
-                </h5>
-                <form type="submit" @submit.prevent="createKeep">
-                  <div class="form-group text-center">
-                    <label for=""></label>
+    </div>
+    <div class="Keep Modal">
+      <div class="modal fade"
+           id="keepCreator"
+           tabindex="-1"
+           role="dialog"
+           aria-labelledby="keepCreatorLabel"
+           aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="keepCreatorLabel">
+                New Keep
+              </h5>
+              <form type="submit" @submit.prevent="createKeep">
+                <div class="form-group text-center">
+                  <label for=""></label>
 
-                    <input type="text"
-                           class="form-control"
-                           name="newKeep"
-                           v-model="state.newKeep.name"
-                           id="name"
-                           aria-describedby="helpId"
-                           placeholder="Keep name"
-                    >
-                    <input type="text"
-                           class="form-control"
-                           name="newKeep"
-                           v-model="state.newKeep.img"
-                           id="board"
-                           aria-describedby="helpId"
-                           placeholder="Img url"
-                    >
+                  <input type="text"
+                         class="form-control"
+                         name="newKeep"
+                         v-model="state.newKeep.name"
+                         id="name"
+                         aria-describedby="helpId"
+                         placeholder="Keep name"
+                  >
+                  <input type="text"
+                         class="form-control"
+                         name="newKeep"
+                         v-model="state.newKeep.img"
+                         id="board"
+                         aria-describedby="helpId"
+                         placeholder="Img url"
+                  >
 
-                    <input type="text"
-                           class="form-control"
-                           name="newKeep"
-                           v-model="state.newKeep.description"
-                           id="board"
-                           aria-describedby="helpId"
-                           placeholder="Keep Description"
-                    >
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="submit" class="btn btn-outline btn-success ">
-                        Submit
-                      </button>
-                    </div>
+                  <input type="text"
+                         class="form-control"
+                         name="newKeep"
+                         v-model="state.newKeep.description"
+                         id="board"
+                         aria-describedby="helpId"
+                         placeholder="Keep Description"
+                  >
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-outline btn-success ">
+                      Submit
+                    </button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -154,6 +152,7 @@ import { keepsService } from '../services/KeepsService'
 // import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import $ from 'jquery'
 export default {
   name: 'Account',
   setup() {
@@ -178,15 +177,25 @@ export default {
     return {
       state,
       account: computed(() => AppState.account),
-      createVault() {
-        state.newVault.creatorId = state.account.Id
-        vaultsService.createVault(state.newVault)
-        state.newVault = {}
+      async createVault() {
+        try {
+          await vaultsService.createVault(state.newVault)
+          $('#vaultCreator').modal('hide')
+          state.newVault = {}
+        } catch (error) {
+          logger.error(error)
+        }
+        // state.newVault.creatorId = state.account.Id
       },
-      createKeep() {
-        state.newKeep.creatorId = state.account.Id
-        keepsService.createKeep(state.newKeep)
-        state.newKeep = {}
+      async createKeep() {
+        try {
+          await keepsService.createKeep(state.newKeep)
+          $('#keepCreator').modal('hide')
+          state.newKeep = {}
+        } catch (error) {
+          logger.error(error)
+        }
+        // state.newKeep.creatorId = state.account.Id
       }
     }
   }

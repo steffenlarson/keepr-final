@@ -1,18 +1,20 @@
 <template>
   <div class="KeepComponent col-md-4 col-6 mt-2">
-    <div class="card">
-      <img class="img-fluid" :src="keepProp.img" alt="">
-      <div class="card-body position">
-        <div class="row">
-          <div class="col">
-            <h4 class="card-title ">
-              {{ keepProp.name }}
-            </h4>
-          </div>
-          <div class="col">
-            <h4>
-              <i class="fa fa-user" aria-hidden="true"></i>
-            </h4>
+    <div data-toggle="modal" :data-target="'#keepDetails'">
+      <div class="card">
+        <img class="img-fluid" :src="keepProp.img" alt="">
+        <div class="card-body position">
+          <div class="row">
+            <div class="col">
+              <h4 class="card-title ">
+                {{ keepProp.name }}
+              </h4>
+            </div>
+            <div class="col">
+              <h4>
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </h4>
+            </div>
           </div>
         </div>
       </div>
@@ -61,9 +63,9 @@
                     </div>
                   </div>
                 </span>
-                <div v-if="keepProp.creatorId == state.user.id">
-                  <i class="fa fa-trash" aria-hidden="true" @click="deleteKeep()"></i>
-                </div>
+                <!-- <div v-if="keepProp.creatorId == state.user.id"> -->
+                <i class="fa fa-trash" aria-hidden="true" @click="deleteKeep()"></i>
+                <!-- </div> -->
                 <div>
                   <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -84,6 +86,7 @@ import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 // import { vaultsService } from '../services/VaultsService'
 import { logger } from '../utils/Logger'
+import $ from 'jquery'
 // import { AppState } from '../AppState'
 export default {
   name: 'KeepComponent',
@@ -98,6 +101,7 @@ export default {
       async deleteKeep() {
         try {
           keepsService.deleteKeep(props.keepProp.id)
+          $('#keepDetails').modal('hide')
         } catch (error) {
           logger.error(error)
         }

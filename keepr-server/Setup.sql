@@ -23,7 +23,6 @@
 
 --   FOREIGN KEY (creatorId)
 --   REFERENCES profiles (id)
---   ON DELETE CASCADE
 -- );
 
 
@@ -40,10 +39,8 @@
 
 --   FOREIGN KEY (creatorId)
 --   REFERENCES profiles (id)
---   ON DELETE CASCADE
 -- );
 
--- FIXME Need to delete the table and take off the delete on cascade on the foreign keys here.
 -- CREATE TABLE vaultkeeps
 -- (
 --    id INT NOT NULL AUTO_INCREMENT,
@@ -54,12 +51,10 @@
 --   PRIMARY KEY (id),
 
 --   FOREIGN KEY (vaultId)
---    REFERENCES vaults (id)
---    ON DELETE CASCADE,
+--    REFERENCES vaults (id),
 
 --   FOREIGN KEY (keepId)
 --    REFERENCES keeps (id)
---    ON DELETE CASCADE
 -- );
 
 

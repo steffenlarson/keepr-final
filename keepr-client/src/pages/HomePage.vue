@@ -4,9 +4,6 @@
       <keep-component v-for="k in state.keeps"
                       :key="k.id"
                       :keep-prop="k"
-                      @click="getOne(k.id)"
-                      data-toggle="modal"
-                      data-target="#keepDetails"
       />
     </div>
   </div>

@@ -33,7 +33,7 @@ class KeepsService {
 
   async deleteKeep(id) {
     await api.delete('api/keeps/' + id)
-    return 'successfully Deleted'
+    this.getKeepsByAccount()
   }
 }
 
