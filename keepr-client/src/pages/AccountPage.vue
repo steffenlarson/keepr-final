@@ -151,19 +151,20 @@
 import { computed, reactive, onMounted } from 'vue'
 import { vaultsService } from '../services/VaultsService'
 import { keepsService } from '../services/KeepsService'
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 export default {
   name: 'Account',
   setup() {
-    const route = useRoute()
+    // const route = useRoute()
     const state = reactive({
       activeProfile: computed(() => AppState.activeProfile),
       newVault: {},
       newKeep: {},
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      user: computed(() => AppState.user)
 
     })
     onMounted(async() => {
@@ -178,12 +179,12 @@ export default {
       state,
       account: computed(() => AppState.account),
       createVault() {
-        state.newVault.creatorId = route.params.id
+        state.newVault.creatorId = state.account.Id
         vaultsService.createVault(state.newVault)
         state.newVault = {}
       },
       createKeep() {
-        state.newKeep.creatorId = route.params.id
+        state.newKeep.creatorId = state.account.Id
         keepsService.createKeep(state.newKeep)
         state.newKeep = {}
       }

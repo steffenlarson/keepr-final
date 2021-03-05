@@ -17,7 +17,7 @@ import { reactive, onMounted, computed } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { logger } from '../utils/Logger'
-import { $ } from 'jquery'
+import $ from 'jquery'
 export default {
   name: 'Home',
   setup() {
