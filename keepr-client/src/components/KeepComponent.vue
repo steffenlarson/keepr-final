@@ -35,7 +35,6 @@
                 <h5><i class="fa fa-eye" aria-hidden="true"></i>  {{ keepProp.views }} <i class="fa fa-camera" aria-hidden="true"></i>  {{ keepProp.keeps }}</h5>
                 <h2>{{ keepProp.name }}</h2>
                 <p>{{ keepProp.description }} </p>
-                <!-- TODO keep count and view count -->
 
                 <span>
                   <div class="dropdown">
@@ -62,9 +61,14 @@
                     </div>
                   </div>
                 </span>
-                <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                </router-link>
+                <div v-if="keepProp.creatorId == state.user.id">
+                  <i class="fa fa-trash" aria-hidden="true" @click="deleteKeep()"></i>
+                </div>
+                <div>
+                  <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -77,18 +81,27 @@
 <script>
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
+import { keepsService } from '../services/KeepsService'
 // import { vaultsService } from '../services/VaultsService'
-// import { logger } from '../utils/Logger'
+import { logger } from '../utils/Logger'
 // import { AppState } from '../AppState'
 export default {
   name: 'KeepComponent',
   props: { keepProp: { type: Object, required: true } },
   setup(props) {
     const state = reactive({
-      vaults: computed(() => AppState.vaults)
+      vaults: computed(() => AppState.vaults),
+      user: computed(() => AppState.user)
     })
     return {
-      state
+      state,
+      async deleteKeep() {
+        try {
+          keepsService.deleteKeep(props.keepProp.id)
+        } catch (error) {
+          logger.error(error)
+        }
+      }
       // async addToVault(id) {
       //   try {
       //     // REVIEW help here I am not sure which service this needs to go to.
