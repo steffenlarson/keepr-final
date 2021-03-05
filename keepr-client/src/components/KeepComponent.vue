@@ -69,6 +69,7 @@
                 <div>
                   <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
                     <i class="fa fa-user" aria-hidden="true"></i>
+                    <!-- <img :src="keepProp.Creator.picture" alt=""> -->
                   </router-link>
                 </div>
               </div>
@@ -100,6 +101,7 @@ export default {
       state,
       async deleteKeep() {
         try {
+          debugger
           keepsService.deleteKeep(props.keepProp.id)
           $('#keepDetails').modal('hide')
         } catch (error) {
