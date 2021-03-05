@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
+import { logger } from '../utils/Logger'
 
 class VaultsService {
   async getVaults() {
@@ -10,6 +11,7 @@ class VaultsService {
   async getVaultById(id) {
     const res = await api.get('api/vaults/' + id)
     AppState.activeVault = res.data
+    logger.log('this is the vault', res.data)
   }
 
   async getVaultsByProfileId(id) {
@@ -28,9 +30,12 @@ class VaultsService {
     return res.data.id
   }
 
-  async deleteVault(id) {
-    await api.delete('api/vaults/' + id)
-    this.getVaultsByAccount()
+  async deleteVault(vault) {
+    // debugger
+    if (confirm('Are you sure?') === true) {
+      await api.delete('api/vaults/' + vault.id)
+      this.getVaultsByAccount()
+    }
   }
 }
 

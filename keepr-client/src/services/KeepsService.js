@@ -32,8 +32,10 @@ class KeepsService {
   }
 
   async deleteKeep(id) {
-    await api.delete('api/keeps/' + id)
-    this.getKeepsByAccount()
+    if (confirm('Are you sure?') === true) {
+      await api.delete('api/keeps/' + id)
+      this.getKeepsByAccount()
+    }
   }
 }
 

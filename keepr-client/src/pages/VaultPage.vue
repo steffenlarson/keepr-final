@@ -35,6 +35,7 @@ export default {
     // TODO onmounted get vault by id
     // get vault by Id and get vault keeps. get keeps by vault id  vaults/vaultid/keeps
     // vault id will come from route params. See profile for example
+    // NOTE need to write functionality for get one vault, get keeps by vault id, delete the keep from the vaultkeep.
     return {
       state
     }

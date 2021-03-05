@@ -82,7 +82,7 @@ namespace keepr_server.Services
       }
       if (original.CreatorId != userId)
       {
-        throw new Exception("Access Denied: Cannot Edit a Vault You did not Create");
+        throw new Exception("Access Denied: Cannot Delete a Vault You did not Create");
       }
       _vr.Remove(id);
       return "successfully deleted";
