@@ -21,7 +21,13 @@ class VaultsService {
 
   async getVaultsByAccount() {
     const res = await api.get('api/account/vaults')
-    AppState.vaults = res.data
+    AppState.myVaults = res.data
+  }
+
+  async getKeepsByVaultId(id) {
+    // REVEIW I think that the route for this is wrong.
+    const res = await api.get('api/vaults/' + id + '/keeps')
+    AppState.keeps = res.data
   }
 
   async createVault(vault) {
@@ -30,12 +36,16 @@ class VaultsService {
     return res.data.id
   }
 
-  async deleteVault(vault) {
+  async deleteVault(id) {
     // debugger
     if (confirm('Are you sure?') === true) {
-      await api.delete('api/vaults/' + vault.id)
+      await api.delete('api/vaults/' + id)
       this.getVaultsByAccount()
     }
+  }
+
+  async addToVault(vaultKeep) {
+    const res = await api.post('api/')
   }
 }
 
