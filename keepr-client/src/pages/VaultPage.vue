@@ -27,7 +27,7 @@ export default {
       // FIXME need to run these functions to set activeVault to appstate.
         await vaultsService.getVaultById(route.params.id)
         // await
-        // await keepsService.getKeepsByVaultId(id)
+        await vaultsService.getKeepsByVaultId(route.params.id)
       } catch (error) {
         logger.error(error)
       }

@@ -44,7 +44,7 @@ export default {
       async deleteVault() {
         try {
           // debugger
-          vaultsService.deleteVault(props.vaultProp)
+          vaultsService.deleteVault(props.vaultProp.id)
         } catch (error) {
           logger.error(error)
         }

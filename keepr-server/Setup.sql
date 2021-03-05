@@ -73,3 +73,8 @@
 -- DROP TABLE IF EXISTS vaultkeeps;
 
 -- SET FOREIGN_KEY_CHECKS = 1;
+
+SELECT 
+       *
+       FROM vaults
+       

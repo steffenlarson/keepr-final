@@ -97,7 +97,10 @@ namespace keepr_server.Services
       return _vr.GetByCreatorId(id).ToList().FindAll(v => v.isPrivate == false);
     }
 
-
+    internal IEnumerable<Vault> GetByAccountId(string id)
+    {
+      return _vr.GetByCreatorId(id);
+    }
 
 
 

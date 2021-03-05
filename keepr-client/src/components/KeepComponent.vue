@@ -52,11 +52,11 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <button class="dropdown-item"
                               :id="vault.id"
-                              v-for="vault in state.vaults "
+                              v-for="vault in state.myVaults "
                               :key="vault.id"
                               @click="addToVault(vault.id)"
                               href="#"
-                      > {{ vault.title }}</button>
+                      > {{ vault.name }}</button>
                       <div>
                       <!-- TODO delete keep vif creator id == user id -->
                       </div>
@@ -85,7 +85,7 @@
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
-// import { vaultsService } from '../services/VaultsService'
+import { vaultsService } from '../services/VaultsService'
 import { logger } from '../utils/Logger'
 import $ from 'jquery'
 // import { AppState } from '../AppState'
@@ -95,7 +95,11 @@ export default {
   setup(props) {
     const state = reactive({
       vaults: computed(() => AppState.vaults),
-      user: computed(() => AppState.user)
+      myVaults: computed(() => AppState.myVaults),
+      user: computed(() => AppState.user),
+      vaultKeep: { keepId: props.keepProp.id, vaultId: state.activeVault.id },
+      activeVault: computed(() => AppState.activeVault)
+
     })
     return {
       state,
@@ -107,15 +111,15 @@ export default {
         } catch (error) {
           logger.error(error)
         }
+      },
+      async addToVault(vaultKeep) {
+        try {
+          state.activeVault.id = vault.id
+          await vaultsService.createVaultKeep(vaultKeep)
+        } catch (error) {
+          logger.error(error)
+        }
       }
-      // async addToVault(id) {
-      //   try {
-      //     // REVIEW help here I am not sure which service this needs to go to.
-      //     await vaultsService.addTo
-      //   } catch (error) {
-      //     logger.error(error)
-      //   }
-      // }
 
     }
   },
