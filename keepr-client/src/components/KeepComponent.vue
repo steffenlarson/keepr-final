@@ -27,43 +27,45 @@
       >
         <div class="modal-dialog modal-lg container-fluid">
           <div class="row modal-content">
-            <div class="col-6">
-              <img class="img-fluid my-3" :src="keepProp.img" alt="">
-            </div>
-            <div class="col-6">
-              <h2>{{ keepProp.name }}</h2>
-              <p>{{ keepProp.description }} </p>
-              <!-- TODO keep count and view count -->
+            <div class="d-flex justify-content-between">
+              <div class="col-6">
+                <img class="img-fluid my-3" :src="keepProp.img" alt="">
+              </div>
+              <div class="col-6">
+                <h5><i class="fa fa-eye" aria-hidden="true"></i>  {{ keepProp.views }} <i class="fa fa-camera" aria-hidden="true"></i>  {{ keepProp.keeps }}</h5>
+                <h2>{{ keepProp.name }}</h2>
+                <p>{{ keepProp.description }} </p>
+                <!-- TODO keep count and view count -->
 
-              <span>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle"
-                          type="button"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                  >
-                    Move
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item"
-                            :id="vault.id"
-                            v-for="vault in state.vaults "
-                            :key="vault.id"
-                            @click="addToVault(vault.id)"
-                            href="#"
-                    > {{ vault.title }}</button>
-                    <div>
+                <span>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                    >
+                      Select a Vault
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item"
+                              :id="vault.id"
+                              v-for="vault in state.vaults "
+                              :key="vault.id"
+                              @click="addToVault(vault.id)"
+                              href="#"
+                      > {{ vault.title }}</button>
+                      <div>
                       <!-- TODO delete keep vif creator id == user id -->
+                      </div>
                     </div>
                   </div>
-                </div>
-              </span>
-
-              <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </router-link>
+                </span>
+                <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>

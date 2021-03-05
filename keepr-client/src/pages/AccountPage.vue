@@ -168,7 +168,6 @@ export default {
     })
     onMounted(async() => {
       try {
-        // FIXME Need to write these methods in the services
         await vaultsService.getVaultsByAccount()
         await keepsService.getKeepsByAccount()
       } catch (error) {

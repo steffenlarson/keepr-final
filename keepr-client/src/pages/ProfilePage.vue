@@ -7,8 +7,8 @@
           <img class="rounded" :src="state.activeProfile.picture" alt="" />
         </div>
         <div class="col">
-          <p>Count</p>
-          <p>count 2</p>
+          <p>Vaults: {{ state.vaults.length }}</p>
+          <p>Keeps: {{ state.keeps.length }} </p>
         </div>
       </div>
     </div>
