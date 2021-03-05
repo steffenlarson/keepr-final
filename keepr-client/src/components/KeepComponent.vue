@@ -1,6 +1,6 @@
 <template>
   <div class="KeepComponent col-md-4 col-6 mt-2">
-    <div data-toggle="modal" :data-target="'#keepDetails'">
+    <div data-toggle="modal" :data-target="'#keepDetails'+ keepProp.id">
       <div class="card">
         <img class="img-fluid" :src="keepProp.img" alt="">
         <div class="card-body position">
@@ -23,7 +23,7 @@
       <div class="modal fade bd-example-modal-lg"
            tabindex="-1"
            role="dialog"
-           id="keepDetails"
+           :id="'keepDetails' + keepProp.id"
            aria-labelledby="myLargeModalLabel"
            aria-hidden="true"
       >
@@ -101,7 +101,7 @@ export default {
       state,
       async deleteKeep() {
         try {
-          debugger
+          // debugger
           keepsService.deleteKeep(props.keepProp.id)
           $('#keepDetails').modal('hide')
         } catch (error) {

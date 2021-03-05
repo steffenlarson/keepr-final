@@ -29,8 +29,8 @@ class VaultsService {
   }
 
   async deleteVault(id) {
-    await api.delete('api/vaults' + id)
-    return 'successfully deleted'
+    await api.delete('api/vaults/' + id)
+    this.getVaultsByAccount()
   }
 }
 
