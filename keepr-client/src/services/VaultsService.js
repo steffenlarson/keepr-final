@@ -28,6 +28,7 @@ class VaultsService {
     // REVEIW I think that the route for this is wrong.
     const res = await api.get('api/vaults/' + id + '/keeps')
     AppState.keeps = res.data
+    logger.log('this is the keepsbyvaults', res.data)
   }
 
   async createVault(vault) {
@@ -45,7 +46,14 @@ class VaultsService {
   }
 
   async addToVault(vaultKeep) {
-    const res = await api.post('api/')
+    await api.post('api/vaultkeeps', vaultKeep)
+  }
+
+  async deleteVaultKeep(id, vaultId) {
+    if (confirm('Are you sure?') === true) {
+      await api.delete('api/vaultkeeps/' + id)
+      this.getKeepsByVaultId(vaultId)
+    }
   }
 }
 

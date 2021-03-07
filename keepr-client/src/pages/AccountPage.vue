@@ -68,7 +68,7 @@
                          aria-describedby="helpId"
                          placeholder="Vaults Description"
                   >
-                  <input type="checkbox" v-model="state.newVault.isPrivate">
+                  <input type="checkbox" v-model="state.newVault.isPrivate" value="false">
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Close
@@ -161,7 +161,7 @@ export default {
       activeProfile: computed(() => AppState.activeProfile),
       newVault: {},
       newKeep: {},
-      vaults: computed(() => AppState.vaults),
+      vaults: computed(() => AppState.myVaults),
       keeps: computed(() => AppState.keeps),
       user: computed(() => AppState.user)
 
@@ -180,6 +180,7 @@ export default {
       async createVault() {
         try {
           await vaultsService.createVault(state.newVault)
+          logger.log(state.newVault)
           $('#vaultCreator').modal('hide')
           state.newVault = {}
         } catch (error) {

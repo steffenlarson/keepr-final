@@ -63,9 +63,9 @@
                     </div>
                   </div>
                 </span>
-                <!-- <div v-if="keepProp.creatorId == state.user.id"> -->
-                <i class="fa fa-trash" aria-hidden="true" @click="deleteKeep()"></i>
-                <!-- </div> -->
+                <div v-if="keepProp.creatorId == state.account.id">
+                  <i class="fa fa-trash" aria-hidden="true" @click="deleteKeep()"></i>
+                </div>
                 <div>
                   <router-link class="text-dark link" :to="{name: 'Profile', params: {id: keepProp.creatorId}}" data-dismiss="modal">
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -96,8 +96,8 @@ export default {
     const state = reactive({
       vaults: computed(() => AppState.vaults),
       myVaults: computed(() => AppState.myVaults),
-      user: computed(() => AppState.user),
-      vaultKeep: { keepId: props.keepProp.id, vaultId: state.activeVault.id },
+      account: computed(() => AppState.account),
+      vaultKeep: { keepId: props.keepProp.id },
       activeVault: computed(() => AppState.activeVault)
 
     })
@@ -112,10 +112,10 @@ export default {
           logger.error(error)
         }
       },
-      async addToVault(vaultKeep) {
+      async addToVault(vaultId) {
         try {
-          state.activeVault.id = vault.id
-          await vaultsService.createVaultKeep(vaultKeep)
+          state.vaultKeep.vaultId = vaultId
+          await vaultsService.addToVault(state.vaultKeep)
         } catch (error) {
           logger.error(error)
         }

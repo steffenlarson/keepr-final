@@ -1,10 +1,21 @@
 <template>
-  <div class="VaultPage">
+  <div class="VaultPage container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <h3>Keep Title: {{ state.activeVault.name }}</h3>
+          <p>Keep Description: {{ state.activeVault.description }} </p>
+          <!-- <p>{{ state.keeps.length }}</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" v-for="k in state.keeps" :key="k.id">
+        <i class="fa fa-trash" aria-hidden="true" @click="deleteVaultKeep(k.vaultKeepId)"></i>
+        <keep-component :keep-prop="k" />
+      </div>
+    </div>
     <!-- TODO add delete vault vif the vault creator id == account id or user id (Person logged in) -->
-
-    <p>This is the vault page</p>
-    <p>{{ state.activeVault.name }}</p>
-    <p>{{ state.activeVault.description }} </p>
   </div>
 </template>
 
@@ -20,7 +31,8 @@ export default {
   setup(props) {
     const route = useRoute()
     const state = reactive({
-      activeVault: computed(() => AppState.activeVault)
+      activeVault: computed(() => AppState.activeVault),
+      keeps: computed(() => AppState.keeps)
     })
     onMounted(async() => {
       try {
@@ -37,7 +49,14 @@ export default {
     // vault id will come from route params. See profile for example
     // NOTE need to write functionality for get one vault, get keeps by vault id, delete the keep from the vaultkeep.
     return {
-      state
+      state,
+      async deleteVaultKeep(id) {
+        try {
+          vaultsService.deleteVaultKeep(id, state.activeVault.id)
+        } catch (error) {
+          logger.error(error)
+        }
+      }
     }
   },
   components: {}
